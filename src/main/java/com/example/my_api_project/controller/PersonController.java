@@ -49,6 +49,6 @@ public class PersonController {
     public void delete(@PathVariable (value = "id") String id){
         Person personDelete = personRepository.findById(id).orElseThrow();
         personRepository.delete(personDelete);
-        System.out.println("DELETED" + id);
+        System.out.println("DELETED - route two" + id);
     }
 }
