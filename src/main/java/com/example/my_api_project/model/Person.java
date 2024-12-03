@@ -3,8 +3,6 @@ package com.example.my_api_project.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
 @Table(name = "person")
 @Entity
 @Getter
