@@ -20,10 +20,7 @@ public class PersonController {
         return personRepository.findAll();
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping("/create")
     public Person createPerson(@RequestBody Person person) {
         Person personSave = new Person();
         personSave.setFirstName(person.getFirstName());
@@ -35,8 +32,8 @@ public class PersonController {
         return personRepository.save(personSave);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public  Person upPerson(@RequestBody Person person){
+    @PutMapping("/update")
+    public Person upPerson(@RequestBody Person person) {
         Person personUpdate = personRepository.findById(person.getId()).orElseThrow();
         personUpdate.setFirstName(person.getFirstName());
         personUpdate.setLastName(person.getLastName());
@@ -45,8 +42,8 @@ public class PersonController {
         return personRepository.save(personUpdate);
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable (value = "id") String id){
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable(value = "id") String id) {
         Person personDelete = personRepository.findById(id).orElseThrow();
         personRepository.delete(personDelete);
         System.out.println("DELETED - route two" + id);
