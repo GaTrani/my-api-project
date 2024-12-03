@@ -3,7 +3,6 @@ package com.example.my_api_project.controller;
 import com.example.my_api_project.model.Person;
 import com.example.my_api_project.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +17,11 @@ public class PersonController {
     @GetMapping("/all")
     public List<Person> getAllPerson() {
         return personRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Person getPerson(@PathVariable String id){
+        return personRepository.findById(id).orElseThrow();
     }
 
     @PostMapping("/create")
@@ -43,7 +47,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable(value = "id") String id) {
+    public void delete(@PathVariable String id) {
         Person personDelete = personRepository.findById(id).orElseThrow();
         personRepository.delete(personDelete);
         System.out.println("DELETED - route two" + id);
